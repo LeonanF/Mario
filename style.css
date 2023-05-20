@@ -1,7 +1,17 @@
+:root{
+    --top-atual: 0;
+    --top-final: 0;
+    --top-meio: 0;
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body{
+    overflow: hidden;
 }
 
 .game-board{
@@ -14,27 +24,86 @@
     background: linear-gradient(#87CEEB, #E0F6FF);
 }
 
-.pipe{
+.contador{
+    font-size: 3rem;
     position: absolute;
-    width: 80px;
-    bottom: 0;
-    animation: pipe-animation 2s infinite linear;
+    right: 0;
 }
 
-.mario{
-    width: 150px;
+.ring {
+    background: url(/assets/ring.webp) no-repeat;
+    height: 100px;
+    background-size: contain;
     position: absolute;
+    width: 100px;
+    display: none;
+    z-index: 1000;
+    animation: ring-animation 2s linear forwards;
+}
+
+.monster{
+    position: absolute;
+    width: 200px;
     bottom: 0;
+    animation: monster-animation 1.2s infinite linear;
+}
+
+.sonic{
+    background: url(assets/sonic.gif);
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 315px;
+}
+
+.doublejump{
+    background: url(assets/sonic-jump.gif) no-repeat;
+    height: 160px;
+    background-size: contain;
+    animation: doublejump 0.4s linear;
+    transform: scaleX(-1);
+    transition: background 120ms;
 }
 
 .jump{
-    animation: mario-jump 0.5s ease-out;
+    height: 200px;
+    width: 200px;
+    background: url(assets/sonicball.gif) no-repeat;
+    animation: sonic-jump 0.8s ease-out;
+}
+
+.fall{
+    background: url(assets/sonic-fall.gif) no-repeat;
+    height: 160px;
+    background-size: contain;
+    animation: fall 0.3s;
+    transform: scaleX(-1);
+    transition: background 120ms;
+}
+
+.forcedfall{
+    background: url(assets/sonic-fall.gif) no-repeat;
+    height: 160px;
+    background-size: contain;
+    animation: fall 0.3s linear;
+}
+
+.game-over{
+    height: 200px;
+    background: url(assets/sonicgameover.png);
+    left: 60px;
 }
 
 .clouds{
     width: 550px;
     position: absolute;
     animation: cloud-anim 4s infinite linear;
+}
+
+.floor{
+    background: url(assets/floor.png);
+    width: 100vw;
+    height: calc(100vh - 500px);
 }
 
 @keyframes cloud-anim{
@@ -47,28 +116,56 @@
     }
 }
 
-@keyframes mario-jump {
-
-    0%{
-        bottom: 0;
+@keyframes ring-animation{
+    from{
+        right: -100px;
     }
 
-    40%{
-        bottom: 180px;
-    }
-    50%{
-        bottom: 180px;
-    }
-    60%{
-        bottom: 180px;
-    }
-
-    100%{
-        bottom: 0;
+    to{
+        right: 100%;
     }
 }
 
-@keyframes pipe-animation {
+@keyframes ring-reset {
+    0% {
+        right: 100%;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes ringEnd{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes sonic-jump {
+
+    0%{
+        top: 315px;
+    }
+
+    40%{
+        top: 115px;
+    }
+    50%{
+        top: 115px;
+    }
+    60%{
+        top: 115px;
+    }
+
+    100%{
+        top: 315px;
+    }
+}
+
+@keyframes monster-animation {
     from{
         right: -80px;
     }
@@ -77,4 +174,53 @@
         right: 100%;
     }
 
+}
+
+@keyframes sonic-over{
+    0%{
+        transform: scale(0.8);
+        top: var(--top-atual);
+        }
+    20%{
+        transform: scale(1);
+        top: var(--top-meio);
+    }
+    50%{
+        transform: scale(1.2);
+        top: var(--top-meio);
+    }
+    80%{
+        transform: scale(1);
+        top: var(--top-atual);
+    }
+    100%{
+        transform: scale(0.8);
+    }
+}
+
+@keyframes doublejump{
+    from{
+        top: var(--top-atual);
+    }
+    to{
+        top: var(--top-final);
+    }
+}
+@keyframes fall{
+    from{
+        top: var(--top-atual);
+    }
+    to{
+        top: 325px;
+    }
+}
+
+
+@keyframes forcedfall{
+    from{
+        top: var(--top-atual);
+    }
+    to{
+        top: 325px;
+    }
 }

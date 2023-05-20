@@ -24,6 +24,39 @@ body{
     background: linear-gradient(#87CEEB, #E0F6FF);
 }
 
+.first-page{
+    background: url(assets/wall.webp)no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+}
+
+.first-page h1{
+    position: absolute;
+    bottom: 100px;
+    font-size: 4em;
+    background: linear-gradient(#87CEEB, #E0F6FF);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.first-page p{
+    font-size: 2em;
+    position: absolute;
+    bottom: 50px;
+    color: yellow;
+}
+
+.first-page img{
+    height: 30px;
+    filter: invert(100%);
+}
+
 .paused {
     animation-play-state: paused !important;
   }

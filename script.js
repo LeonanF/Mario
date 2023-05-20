@@ -14,7 +14,7 @@ ring.classList.add('paused');
 const contador = document.querySelector('.contador');
 contador.classList.add('paused');
 
-
+const fp = document.querySelector('.first-page')
 
 function runGame() {
 
@@ -196,8 +196,11 @@ function runGame() {
   if (sonic.classList.contains('paused')) {
     function handleKeyUp(event) {
       if (event.key === 'ArrowUp') {
+        fp.remove()
+        setTimeout(()=>{
         runGame()
         document.removeEventListener('keyup', handleKeyUp)
+        }, 500)
       }
     }
   

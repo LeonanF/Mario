@@ -11,7 +11,7 @@ cloud.classList.add('paused');
 const ring = document.querySelector('.ring');
 ring.classList.add('paused');
 
-const contador = document.querySelector('.contador');
+const contador = document.querySelector('.contador p');
 contador.classList.add('paused');
 
 const fp = document.querySelector('.first-page')
@@ -33,7 +33,8 @@ function runGame() {
     let onFall;
   
     function jump() {
-      sonic.classList.add('jump');
+        if(!sonic.classList.contains('game-over')){
+      sonic.classList.add('jump')}
       onAir = true;
       setTimeout(() => {
         sonic.classList.remove('jump');
@@ -106,7 +107,9 @@ function runGame() {
         ringLeft > 0
       ) {
         if (!contIncre) {
-          contador.innerHTML = `${++valor}`;
+            ++valor
+            let valorFormatado = valor.toString().padStart(4, '0')
+          contador.innerHTML = `${valorFormatado}`;
           ring.style.display = 'none';
           contIncre = true; // Marcando que o contador foi incrementado
         }
@@ -149,10 +152,11 @@ function runGame() {
         clearInterval(loop);
         clearInterval(ringReloadInterval);
         document.addEventListener('keyup', (event) => {
-          if (event.key === 'ArrowUp') {
+          setTimeout(()=>{
+            if (event.key === 'ArrowUp') {
             document.location.reload()
           }
-        });
+        }, 1200)})
         teste = false;
       }
   
@@ -188,7 +192,7 @@ function runGame() {
         setTimeout(() => {
           ring.style.animation = 'ring-animation 3s linear forwards'; // Inicia novamente a animação do anel
           startRingReload(); // Reinicia o intervalo para exibir o próximo anel
-        }, 500); // Aguarda 100ms antes de reiniciar a animação para evitar problemas de renderização
+        }, 1000); // Aguarda 100ms antes de reiniciar a animação para evitar problemas de renderização
       }
     });
   }

@@ -1,3 +1,5 @@
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 :root{
     --top-atual: 0;
     --top-final: 0;
@@ -8,6 +10,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 body{
@@ -53,7 +56,7 @@ body{
 }
 
 .first-page img{
-    height: 30px;
+    height: 25px;
     filter: invert(100%);
 }
 
@@ -62,9 +65,17 @@ body{
   }
 
 .contador{
-    font-size: 3rem;
+    font-size: 2.5rem;
     position: absolute;
-    right: 0;
+    left: 0;
+    background-color: wheat;
+    border-radius: 20px;
+    margin: 15px;
+    
+}
+
+.contador p{
+    padding: 10px;
 }
 
 .ring {
@@ -74,7 +85,7 @@ body{
     position: absolute;
     width: 100px;
     display: none;
-    z-index: 1000;
+    z-index: 1;
     animation: ring-animation 2s linear forwards;
 }
 
@@ -141,6 +152,37 @@ body{
     background: url(assets/floor.png);
     width: 100vw;
     height: calc(100vh - 500px);
+}
+
+.setas{
+    background-color: wheat;
+    height: 8vh;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.setas p{
+    font-size: 1.6em;
+    vertical-align:middle;
+    height: 33px;
+}
+
+.setas img{
+    height: 20px;
+}
+
+#space{
+    position: relative;
+    top: 8px;
+    height: 33px;
+}
+
+#queda{
+    transform: scaleY(-1);
 }
 
 @keyframes cloud-anim{

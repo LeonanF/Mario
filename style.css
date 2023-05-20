@@ -24,6 +24,10 @@ body{
     background: linear-gradient(#87CEEB, #E0F6FF);
 }
 
+.paused {
+    animation-play-state: paused !important;
+  }
+
 .contador{
     font-size: 3rem;
     position: absolute;
@@ -31,7 +35,7 @@ body{
 }
 
 .ring {
-    background: url(/assets/ring.webp) no-repeat;
+    background: url(assets/ring.webp) no-repeat;
     height: 100px;
     background-size: contain;
     position: absolute;
@@ -76,7 +80,7 @@ body{
     background: url(assets/sonic-fall.gif) no-repeat;
     height: 160px;
     background-size: contain;
-    animation: fall 0.3s;
+    animation: fall 0.3s linear;
     transform: scaleX(-1);
     transition: background 120ms;
 }
@@ -85,7 +89,7 @@ body{
     background: url(assets/sonic-fall.gif) no-repeat;
     height: 160px;
     background-size: contain;
-    animation: fall 0.3s linear;
+    animation: fall 0.4s linear;
 }
 
 .game-over{

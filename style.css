@@ -124,7 +124,7 @@ body{
     background: url(assets/sonic-fall.gif) no-repeat;
     height: 160px;
     background-size: contain;
-    animation: fall 0.3s linear;
+    animation: fall 2.5s ease-out;
     transform: scaleX(-1);
     transition: background 120ms;
 }
@@ -279,9 +279,10 @@ body{
         top: var(--top-final);
     }
 }
+
 @keyframes fall{
     from{
-        top: var(--top-atual);
+        top: var(--top-final);
     }
     to{
         top: 325px;

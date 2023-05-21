@@ -121,7 +121,7 @@ function runGame() {
     function setTop() {
       const sonicPosition = sonic.offsetTop;
       sonic.style.setProperty('--top-atual', `${sonicPosition - 2}px`)
-      sonic.style.setProperty('--top-final', `${sonicPosition - 5}px`)
+      sonic.style.setProperty('--top-final', `${sonicPosition - 3.5}px`)
       sonic.style.setProperty('--top-meio', `${sonicPosition + 10}px`)
     }
   

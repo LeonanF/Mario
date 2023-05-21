@@ -139,7 +139,7 @@ body{
 .game-over{
     height: 200px;
     background: url(assets/sonicgameover.png);
-    left: 60px;
+    left: 10px;
 }
 
 .clouds{
@@ -228,16 +228,10 @@ body{
     0%{
         top: 315px;
     }
-
-    40%{
-        top: 115px;
-    }
     50%{
         top: 115px;
     }
-    60%{
-        top: 115px;
-    }
+    
 
     100%{
         top: 315px;

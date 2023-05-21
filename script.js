@@ -131,7 +131,7 @@ function runGame() {
       const cloudPosition = cloud.offsetLeft
       const ringPosition = ring.offsetLeft
   
-      if (monsterPosition <= 130 && monsterPosition > 0 && sonicPosition > 150) {
+      if ((monsterPosition <= 110 && sonicPosition > 150 && monsterPosition > 0) || (monsterPosition <= 120 && sonicPosition > 180 && monsterPosition > 0)) {
         monster.style.animation = 'none'
         monster.style.left = `${monsterPosition}px`
   

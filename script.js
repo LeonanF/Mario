@@ -16,6 +16,10 @@ contador.classList.add('paused')
 
 const fp = document.querySelector('.first-page')
 
+const gb = document.querySelector('.game-board')
+
+sonic.style.setProperty('--top-base', '565px')
+
 function runGame() {
 
 
@@ -31,21 +35,24 @@ function runGame() {
     let onAir
     let isDouble
     let onFall
+    let forcedfall
   
     function jump() {
         if(!sonic.classList.contains('game-over')){
       sonic.classList.add('jump')}
       onAir = true
+      forcedfall = false;
       setTimeout(() => {
         sonic.classList.remove('jump')
         onAir = false
-      }, 800)
+      }, 700)
     }
   
     function doublejump() {
       sonic.classList.remove('jump')
       sonic.classList.add('doublejump')
       isDouble = true
+      if(!forcedfall){
       setTimeout(() => {
         sonic.classList.add('fall');
         sonic.classList.remove('doublejump')
@@ -53,8 +60,8 @@ function runGame() {
         setTimeout(() => {
           sonic.classList.remove('fall')
         }, 300)
-      }, 400)
-    }
+      }, 500)
+    }}
   
     function fall() {
       sonic.classList.remove('jump')
@@ -64,15 +71,24 @@ function runGame() {
       setTimeout(() => {
         sonic.classList.remove('forcedfall')
         onFall = false
-      }, 200)
+      }, 150)
     }
   
-    document.addEventListener('keyup', (event) => {
+    let teclaPress = false;
+
+    document.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowUp' && !onAir && !onFall) {
+        if(!teclaPress){
         jump()
+        teclaPress = true
+      }
       }
     })
   
+    document.addEventListener('keyup', (event)=>{
+      teclaPress = false;
+    })
+
     document.addEventListener('keyup', (event) => {
       if (
         event.key === ' ' &&
@@ -91,11 +107,12 @@ function runGame() {
         !sonic.classList.contains('game-over') &&
         (sonic.classList.contains('doublejump') || sonic.classList.contains('jump'))
       ) {
+        forcedfall=true;
         fall()
       }
     })
   
-    function checkCollision() {
+    function checkCollisionRing() {
       const sonicPosition = +window.getComputedStyle(sonic).top.replace('px', '')
       const ringPosition = +window.getComputedStyle(ring).top.replace('px', '')
       const ringLeft = ring.offsetLeft
@@ -120,18 +137,18 @@ function runGame() {
   
     function setTop() {
       const sonicPosition = sonic.offsetTop;
-      sonic.style.setProperty('--top-atual', `${sonicPosition - 2}px`)
-      sonic.style.setProperty('--top-final', `${sonicPosition - 3.5}px`)
-      sonic.style.setProperty('--top-meio', `${sonicPosition + 10}px`)
+      document.documentElement.style.setProperty('--top-atual', `${sonicPosition-2}px`);
+      document.documentElement.style.setProperty('--top-final', `${sonicPosition-10}px`)
+      document.documentElement.style.setProperty('--top-meio', `${sonicPosition + 10}px`)
     }
-  
+
     const loop = setInterval(() => {
       const monsterPosition = monster.offsetLeft
       const sonicPosition = +window.getComputedStyle(sonic).top.replace('px', '')
       const cloudPosition = cloud.offsetLeft
       const ringPosition = ring.offsetLeft
   
-      if ((monsterPosition <= 110 && sonicPosition > 150 && monsterPosition > 0) || (monsterPosition <= 120 && sonicPosition > 180 && monsterPosition > 0)) {
+      if ((monsterPosition <= 110 && sonicPosition > 400 && monsterPosition > 0) || (monsterPosition <= 120 && sonicPosition > 430 && monsterPosition > 0)) {
         monster.style.animation = 'none'
         monster.style.left = `${monsterPosition}px`
   
@@ -162,8 +179,8 @@ function runGame() {
   
       setTop()
 
-      checkCollision()
-    }, 10);
+      checkCollisionRing()
+    }, 10)
   
     function getRandomInt(min, max) {
       min = Math.ceil(min)
@@ -176,9 +193,9 @@ function runGame() {
     function startRingReload() {
       clearInterval(ringReloadInterval)
       ringReloadInterval = setInterval(() => {
-        ring.style.top = `${getRandomInt(0, 350)}px`
+        ring.style.top = `${getRandomInt(70, `${gb.offsetHeight-100}`)}px`
         ring.style.display = 'block';
-      }, 2000)
+      }, getRandomInt(2000, 3000))
     }
     startRingReload()
   

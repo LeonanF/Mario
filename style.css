@@ -4,6 +4,7 @@
     --top-atual: 0;
     --top-final: 0;
     --top-meio: 0;
+    --top-base: 0;
 }
 
 *{
@@ -19,7 +20,7 @@ body{
 
 .game-board{
     width: 100%;
-    height: 500px;
+    height: 750px;
     border-bottom: 15px solid rgb(35, 160, 35);
     margin: 0 auto;
     position: relative;
@@ -101,14 +102,14 @@ body{
     height: 200px;
     width: 200px;
     position: absolute;
-    top: 315px;
+    top: var(--top-base)
 }
 
 .doublejump{
     background: url(assets/sonic-jump.gif) no-repeat;
     height: 160px;
     background-size: contain;
-    animation: doublejump 0.4s linear;
+    animation: doublejump 1s ease-out;
     transform: scaleX(-1);
     transition: background 120ms;
 }
@@ -117,14 +118,14 @@ body{
     height: 200px;
     width: 200px;
     background: url(assets/sonicball.gif) no-repeat;
-    animation: sonic-jump 0.8s ease-out;
+    animation: sonic-jump 0.7s ease-out;
 }
 
 .fall{
     background: url(assets/sonic-fall.gif) no-repeat;
     height: 160px;
     background-size: contain;
-    animation: fall 2.5s ease-out;
+    animation: fall 1.5s ease-out;
     transform: scaleX(-1);
     transition: background 120ms;
 }
@@ -133,7 +134,7 @@ body{
     background: url(assets/sonic-fall.gif) no-repeat;
     height: 160px;
     background-size: contain;
-    animation: fall 0.4s linear;
+    animation: fall 0.3s ease-out;
 }
 
 .game-over{
@@ -143,6 +144,7 @@ body{
 }
 
 .clouds{
+    margin-top: 5vh;
     width: 550px;
     position: absolute;
     animation: cloud-anim 4s infinite linear;
@@ -226,15 +228,14 @@ body{
 @keyframes sonic-jump {
 
     0%{
-        top: 315px;
+        top: var(--top-base)
     }
     50%{
-        top: 115px;
+        top: 270px;
     }
-    
 
     100%{
-        top: 315px;
+        top: var(--top-base)
     }
 }
 
@@ -272,10 +273,10 @@ body{
 }
 
 @keyframes doublejump{
-    from{
+    0%{
         top: var(--top-atual);
     }
-    to{
+    100%{
         top: var(--top-final);
     }
 }
@@ -285,7 +286,7 @@ body{
         top: var(--top-final);
     }
     to{
-        top: 325px;
+        top: var(--top-base);
     }
 }
 
@@ -295,6 +296,6 @@ body{
         top: var(--top-atual);
     }
     to{
-        top: 325px;
+        top: var(--top-base);
     }
 }

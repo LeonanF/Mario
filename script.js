@@ -18,7 +18,7 @@ const fp = document.querySelector('.first-page')
 
 const gb = document.querySelector('.game-board')
 
-sonic.style.setProperty('--top-base', '565px')
+sonic.style.setProperty('--top-base', `${gb.offsetHeight-185}px`)
 
 function runGame() {
 
@@ -35,13 +35,11 @@ function runGame() {
     let onAir
     let isDouble
     let onFall
-    let forcedfall
   
     function jump() {
         if(!sonic.classList.contains('game-over')){
       sonic.classList.add('jump')}
       onAir = true
-      forcedfall = false;
       setTimeout(() => {
         sonic.classList.remove('jump')
         onAir = false
@@ -52,7 +50,6 @@ function runGame() {
       sonic.classList.remove('jump')
       sonic.classList.add('doublejump')
       isDouble = true
-      if(!forcedfall){
       setTimeout(() => {
         sonic.classList.add('fall');
         sonic.classList.remove('doublejump')
@@ -61,17 +58,6 @@ function runGame() {
           sonic.classList.remove('fall')
         }, 300)
       }, 500)
-    }}
-  
-    function fall() {
-      sonic.classList.remove('jump')
-      sonic.classList.remove('doublejump')
-      sonic.classList.add('forcedfall')
-      onFall = true
-      setTimeout(() => {
-        sonic.classList.remove('forcedfall')
-        onFall = false
-      }, 150)
     }
   
     let teclaPress = false;
@@ -94,24 +80,12 @@ function runGame() {
         event.key === ' ' &&
         onAir &&
         !isDouble &&
-        !sonic.classList.contains('fall') &&
-        !sonic.classList.contains('forcedfall')
+        !sonic.classList.contains('fall')
       ) {
         doublejump()
       }
     })
-  
-    document.addEventListener('keyup', (event) => {
-      if (
-        event.key === 'ArrowDown' &&
-        !sonic.classList.contains('game-over') &&
-        (sonic.classList.contains('doublejump') || sonic.classList.contains('jump'))
-      ) {
-        forcedfall=true;
-        fall()
-      }
-    })
-  
+    
     function checkCollisionRing() {
       const sonicPosition = +window.getComputedStyle(sonic).top.replace('px', '')
       const ringPosition = +window.getComputedStyle(ring).top.replace('px', '')

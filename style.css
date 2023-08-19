@@ -1,11 +1,5 @@
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-:root{
-    --top-atual: 0;
-    --top-final: 0;
-    --top-meio: 0;
-    --top-base: 0;
-}
 
 *{
     margin: 0;
@@ -14,14 +8,18 @@
     font-family: 'Bebas Neue', sans-serif;
 }
 
+:root{
+    --current-translateY: 0;
+    --target-translateY: 0;
+}
+
 body{
     overflow: hidden;
 }
 
 .game-board{
-    width: 100%;
     height: 80vh;
-    border-bottom: 15px solid rgb(35, 160, 35);
+    border-bottom: 1vh solid rgb(35, 160, 35);
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -31,6 +29,7 @@ body{
 .first-page{
     background: url(assets/wall.webp)no-repeat;
     background-size: cover;
+    background-position: center;
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -41,8 +40,8 @@ body{
 
 .first-page h1{
     position: absolute;
-    bottom: 100px;
-    font-size: 4em;
+    bottom: 5rem;
+    font-size: 4rem;
     background: linear-gradient(#87CEEB, #E0F6FF);
     background-clip: text;
     -webkit-background-clip: text;
@@ -52,12 +51,12 @@ body{
 .first-page p{
     font-size: 2em;
     position: absolute;
-    bottom: 50px;
+    bottom: 5vh;
     color: yellow;
 }
 
 .first-page img{
-    height: 25px;
+    height: 1.5rem;
     filter: invert(100%);
 }
 
@@ -70,21 +69,20 @@ body{
     position: absolute;
     left: 0;
     background-color: wheat;
-    border-radius: 20px;
-    margin: 15px;
-    
+    border-radius: 1.2rem;
+    margin: 1rem;
 }
 
 .contador p{
-    padding: 10px;
+    padding: 0.7rem;
 }
 
 .ring {
     background: url(assets/ring.webp) no-repeat;
-    height: 100px;
+    height: 7rem;
+    width: 7rem;
     background-size: contain;
     position: absolute;
-    width: 100px;
     display: none;
     z-index: 1;
     animation: ring-animation 2s linear forwards;
@@ -92,54 +90,54 @@ body{
 
 .monster{
     position: absolute;
-    width: 200px;
+    width: 12rem;
     bottom: 0;
     animation: monster-animation 1.2s infinite linear;
 }
 
 .sonic{
     background: url(assets/sonic.gif);
-    height: 200px;
-    width: 200px;
+    height: 12rem;
+    width: 12rem;
     position: absolute;
     top: var(--top-base)
 }
 
 .doublejump{
     background: url(assets/sonic-jump.gif) no-repeat;
-    height: 160px;
+    height: 10rem;
     background-size: contain;
-    animation: doublejump 1s ease-out;
+    animation: doublejump 1s linear;
     transform: scaleX(-1);
     transition: background 120ms;
 }
 
 .jump{
-    height: 200px;
-    width: 200px;
+    height: 12rem;
+    width: 12rem;
     background: url(assets/sonicball.gif) no-repeat;
     animation: sonic-jump 0.7s ease-out;
 }
 
 .fall{
     background: url(assets/sonic-fall.gif) no-repeat;
-    height: 160px;
+    height: 10rem;
     background-size: contain;
-    animation: fall 1.5s ease-out;
+    animation: fall 1s ease-out;
     transform: scaleX(-1);
     transition: background 120ms;
 }
 
 
 .game-over{
-    height: 200px;
+    height: 12rem;
     background: url(assets/sonicgameover.png);
-    left: 15px;
+    left: 0.5rem;
 }
 
 .clouds{
     margin-top: 5vh;
-    width: 550px;
+    width: 25vw;
     position: absolute;
     animation: cloud-anim 4s infinite linear;
 }
@@ -147,7 +145,7 @@ body{
 .floor{
     background: url(assets/floor.png);
     width: 100vw;
-    height: calc(100vh - 500px);
+    height: 20vh;
 }
 
 .setas{
@@ -164,17 +162,17 @@ body{
 .setas p{
     font-size: 1.6em;
     vertical-align:middle;
-    height: 33px;
+    height: 2rem;
 }
 
 .setas img{
-    height: 20px;
+    height: 1.5rem;
 }
 
 #space{
     position: relative;
-    top: 8px;
-    height: 33px;
+    top: 0.5rem;
+    height: 2rem;
 }
 
 #queda{
@@ -184,7 +182,7 @@ body{
 
 @keyframes cloud-anim{
     from{
-        right: -570px;
+        right: -26vw;
     }
 
     to{
@@ -194,7 +192,7 @@ body{
 
 @keyframes ring-animation{
     from{
-        right: -100px;
+        right: -8rem;
     }
 
     to{
@@ -221,22 +219,20 @@ body{
 }
 
 @keyframes sonic-jump {
-
-    0%{
-        top: var(--top-base)
+    0% {
+        transform: translateY(0);
     }
-    50%{
-        top: 270px;
+    50% {
+        transform: translateY(-150%);
     }
-
-    100%{
-        top: var(--top-base)
+    100% {
+        transform: translateY(0);
     }
 }
 
 @keyframes monster-animation {
     from{
-        right: -200px;
+        right: -13rem;
     }
 
     to{
@@ -248,20 +244,12 @@ body{
 @keyframes sonic-over{
     0%{
         transform: scale(0.8);
-        top: var(--top-atual);
+        transform: translateY(0);
         }
-    20%{
-        transform: scale(1);
-        top: var(--top-meio);
-    }
     50%{
-        transform: scale(1.2);
-        top: var(--top-meio);
-    }
-    80%{
         transform: scale(1);
-        top: var(--top-atual);
-    }
+        transform: translateY(-50%);
+        }
     100%{
         transform: scale(0.8);
     }
@@ -269,18 +257,24 @@ body{
 
 @keyframes doublejump{
     0%{
-        top: var(--top-atual);
+        transform: translateY(var(--current-translateY));
     }
     100%{
-        top: var(--top-final);
+        transform: translateY(var(--target-translateY));
     }
 }
 
 @keyframes fall{
     from{
-        top: var(--top-final);
+        transform: translateY(var(--current-translateY));
     }
     to{
-        top: var(--top-base);
+        transform: translateY(300%);
+    }
+}
+
+@media(max-width:1024px){
+    .setas{
+        display: none;
     }
 }

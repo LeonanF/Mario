@@ -35,7 +35,18 @@ function runGame() {
     let onAir
     let isDouble
     let onFall
+    let sonicHeight = sonic.clientHeight;
   
+    //Setter de variáveis CSS
+    function setTranslateY(){
+      const currentTransform = getComputedStyle(sonic).transform
+      const currentTranslateY = getTranslateY(currentTransform)
+      const percentTranslateY = (currentTranslateY/sonicHeight)*100
+      document.documentElement.style.setProperty('--current-translateY', `${percentTranslateY}%`)
+      document.documentElement.style.setProperty('--target-translateY', `${percentTranslateY-100}%`)
+    }
+
+    //Funções de pulo
     function jump() {
         if(!sonic.classList.contains('game-over')){
       sonic.classList.add('jump')}
@@ -47,10 +58,12 @@ function runGame() {
     }
   
     function doublejump() {
+      setTranslateY()
       sonic.classList.remove('jump')
       sonic.classList.add('doublejump')
       isDouble = true
       setTimeout(() => {
+        setTranslateY()
         sonic.classList.add('fall');
         sonic.classList.remove('doublejump')
         isDouble = false;
@@ -71,7 +84,7 @@ function runGame() {
       }
     })
   
-    document.addEventListener('keyup', (event)=>{
+    document.addEventListener('keyup', ()=>{
       teclaPress = false;
     })
 
@@ -109,12 +122,6 @@ function runGame() {
       }
     }
   
-    function setTop() {
-      const sonicPosition = sonic.offsetTop;
-      document.documentElement.style.setProperty('--top-atual', `${sonicPosition-2}px`);
-      document.documentElement.style.setProperty('--top-final', `${sonicPosition-10}px`)
-      document.documentElement.style.setProperty('--top-meio', `${sonicPosition + 10}px`)
-    }
 
     const loop = setInterval(() => {
       const monsterPosition = monster.offsetLeft
@@ -128,7 +135,7 @@ function runGame() {
   
         sonic.classList.add('game-over');
 
-        sonic.style.animation = 'sonic-over 0.7s linear forwards'
+        sonic.style.animation = 'sonic-over 0.5s linear forwards'
         sonic.style.top = `${sonicPosition}px`
   
         cloud.style.animation = 'none'
@@ -150,8 +157,6 @@ function runGame() {
         }, 1200)})
         teste = false
       }
-  
-      setTop()
 
       checkCollisionRing()
     }, 10)
@@ -200,4 +205,10 @@ function runGame() {
     }
   
     document.addEventListener('keyup', handleKeyUp)
+  }
+
+  //Função para atualizar o translateY atual e deixar o doublejump funcional
+  function getTranslateY(matrix){
+    const matrixValues = matrix.split(', ');
+    return parseInt(matrixValues[5], 10);
   }

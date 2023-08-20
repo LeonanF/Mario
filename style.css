@@ -79,8 +79,8 @@ body{
 
 .ring {
     background: url(assets/ring.webp) no-repeat;
-    height: 7rem;
-    width: 7rem;
+    height: 8vw;
+    width: 8vw;
     background-size: contain;
     position: absolute;
     display: none;
@@ -89,49 +89,50 @@ body{
 }
 
 .monster{
+    background: url(assets/monster.png) no-repeat;
+    background-size: cover;
     position: absolute;
-    width: 12rem;
+    height: 12vw;
+    width: 12vw;
     bottom: 0;
     animation: monster-animation 1.2s infinite linear;
 }
 
 .sonic{
-    background: url(assets/sonic.gif);
-    height: 12rem;
-    width: 12rem;
+    background: url(assets/sonic.gif) no-repeat;
+    background-size: cover;
     position: absolute;
-    top: var(--top-base)
+    height: 12vw;
+    width: 12vw;
+    bottom: 0;
+    margin-bottom: -1.7vw;
 }
 
 .doublejump{
     background: url(assets/sonic-jump.gif) no-repeat;
-    height: 10rem;
+    height: 11vw;
     background-size: contain;
     animation: doublejump 1s linear;
-    transform: scaleX(-1);
     transition: background 120ms;
 }
 
 .jump{
-    height: 12rem;
-    width: 12rem;
+    height: 12vw;
+    width: 12vw;
     background: url(assets/sonicball.gif) no-repeat;
+    background-size: cover;
     animation: sonic-jump 0.7s ease-out;
 }
 
 .fall{
-    background: url(assets/sonic-fall.gif) no-repeat;
-    height: 10rem;
-    background-size: contain;
     animation: fall 1s ease-out;
-    transform: scaleX(-1);
-    transition: background 120ms;
 }
 
 
 .game-over{
-    height: 12rem;
-    background: url(assets/sonicgameover.png);
+    height: 12vw;
+    background: url(assets/sonicgameover.png) no-repeat;
+    background-size: contain;
     left: 0.5rem;
 }
 
@@ -223,7 +224,7 @@ body{
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-150%);
+        transform: translateY(-100%);
     }
     100% {
         transform: translateY(0);
@@ -269,7 +270,7 @@ body{
         transform: translateY(var(--current-translateY));
     }
     to{
-        transform: translateY(300%);
+        transform: translateY(150%);
     }
 }
 

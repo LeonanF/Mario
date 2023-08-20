@@ -18,8 +18,6 @@ const fp = document.querySelector('.first-page')
 
 const gb = document.querySelector('.game-board')
 
-sonic.style.setProperty('--top-base', `${gb.offsetHeight-185}px`)
-
 function runGame() {
 
 
@@ -43,7 +41,7 @@ function runGame() {
       const currentTranslateY = getTranslateY(currentTransform)
       const percentTranslateY = (currentTranslateY/sonicHeight)*100
       document.documentElement.style.setProperty('--current-translateY', `${percentTranslateY}%`)
-      document.documentElement.style.setProperty('--target-translateY', `${percentTranslateY-100}%`)
+      document.documentElement.style.setProperty('--target-translateY', `${percentTranslateY-180}%`)
     }
 
     //Funções de pulo
@@ -56,7 +54,8 @@ function runGame() {
         onAir = false
       }, 700)
     }
-  
+    
+    //Função de pulo duplo
     function doublejump() {
       setTranslateY()
       sonic.classList.remove('jump')
@@ -75,18 +74,21 @@ function runGame() {
   
     let teclaPress = false;
 
+    //Teste se a tecla foi pressionada
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowUp' && !onAir && !onFall) {
+      if ((event.key === 'ArrowUp' || event.key === 'w') && !onAir && !onFall) {
         if(!teclaPress){
         jump()
         teclaPress = true
       }
       }
     })
-  
+    
+    //Testa se a tecla foi liberada, para não ser possível pular de forma contínua
     document.addEventListener('keyup', ()=>{
       teclaPress = false;
     })
+
 
     document.addEventListener('keyup', (event) => {
       if (
@@ -99,6 +101,7 @@ function runGame() {
       }
     })
     
+    //Função para colisão com anel
     function checkCollisionRing() {
       const sonicPosition = +window.getComputedStyle(sonic).top.replace('px', '')
       const ringPosition = +window.getComputedStyle(ring).top.replace('px', '')
@@ -123,6 +126,7 @@ function runGame() {
     }
   
 
+    /*
     const loop = setInterval(() => {
       const monsterPosition = monster.offsetLeft
       const sonicPosition = +window.getComputedStyle(sonic).top.replace('px', '')
@@ -160,7 +164,9 @@ function runGame() {
 
       checkCollisionRing()
     }, 10)
-  
+    */
+
+
     function getRandomInt(min, max) {
       min = Math.ceil(min)
       max = Math.floor(max)
@@ -195,7 +201,7 @@ function runGame() {
 
   if (sonic.classList.contains('paused')) {
     function handleKeyUp(event) {
-      if (event.key === 'ArrowUp') {
+      if (event.key === 'Enter') {
         fp.remove()
         setTimeout(()=>{
         runGame()

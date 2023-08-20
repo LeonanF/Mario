@@ -65,7 +65,7 @@ body{
   }
 
 .contador{
-    font-size: 2.5rem;
+    font-size: 4vw;
     position: absolute;
     left: 0;
     background-color: wheat;
@@ -121,11 +121,11 @@ body{
     width: 12vw;
     background: url(assets/sonicball.gif) no-repeat;
     background-size: cover;
-    animation: sonic-jump 0.7s ease-out;
+    animation: sonic-jump 0.7s linear;
 }
 
 .fall{
-    animation: fall 1s ease-out;
+    animation: fall 0.7s ease-out;
 }
 
 
@@ -146,7 +146,7 @@ body{
 .floor{
     background: url(assets/floor.png);
     width: 100vw;
-    height: 20vh;
+    height: 100vh;
 }
 
 .setas{
@@ -224,7 +224,7 @@ body{
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-100%);
+        transform: translateY(-130%);
     }
     100% {
         transform: translateY(0);
@@ -274,7 +274,28 @@ body{
     }
 }
 
-@media(max-width:1024px){
+
+@media((max-width:850px)){
+    .fall{
+        animation-duration: 0.6s;
+    }
+}
+
+/*
+@media((min-width: 851px) and (max-width:1024px)){
+    .game-board{
+        height: 50vh;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1400px){
+    .game-board{
+        height: 70vh;
+    }
+}
+*/
+
+@media((max-width:1024px)){
     .setas{
         display: none;
     }

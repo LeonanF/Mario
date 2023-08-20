@@ -41,7 +41,7 @@ function runGame() {
       const currentTranslateY = getTranslateY(currentTransform)
       const percentTranslateY = (currentTranslateY/sonicHeight)*100
       document.documentElement.style.setProperty('--current-translateY', `${percentTranslateY}%`)
-      document.documentElement.style.setProperty('--target-translateY', `${percentTranslateY-180}%`)
+      document.documentElement.style.setProperty('--target-translateY', `${percentTranslateY-320}%`)
     }
 
     //Funções de pulo
@@ -218,3 +218,22 @@ function runGame() {
     const matrixValues = matrix.split(', ');
     return parseInt(matrixValues[5], 10);
   }
+
+  //Função para ajustar a altura do game-board de acordo com a tela do usuário
+  function adjustGameBoardHeight() {
+    const gameBoard = document.querySelector('.game-board');
+    const screenWidth = window.innerWidth;
+  
+    if (screenWidth >= 1400) {
+      gameBoard.style.height = '80vh';
+    } else{
+      const reductionFactor = Math.floor((1400 - screenWidth) / 10);
+      console.log(reductionFactor)
+      const adjustedHeight = 70 - (reductionFactor * 0.45);
+      gameBoard.style.height = `${adjustedHeight}vh`;
+    }
+  }
+  // Chamar a função quando a página carregar e quando a tela for redimensionada
+  window.addEventListener('load', adjustGameBoardHeight);
+  window.addEventListener('resize', adjustGameBoardHeight);
+  

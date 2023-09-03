@@ -217,7 +217,6 @@ function runGame() {
       gameBoard.style.height = '80vh';
     } else{
       const reductionFactor = Math.floor((1400 - screenWidth) / 10);
-      console.log(reductionFactor)
       const adjustedHeight = 70 - (reductionFactor * 0.45);
       gameBoard.style.height = `${adjustedHeight}vh`;
     }

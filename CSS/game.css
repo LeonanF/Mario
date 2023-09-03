@@ -40,7 +40,7 @@ body{
 }
 
 .ring {
-    background: url(assets/ring.webp) no-repeat;
+    background: url(../assets/ring.webp) no-repeat;
     height: 8vw;
     width: 8vw;
     background-size: contain;
@@ -51,7 +51,7 @@ body{
 }
 
 .monster{
-    background: url(assets/monster.png) no-repeat;
+    background: url(../assets/monster.png) no-repeat;
     background-size: cover;
     position: absolute;
     height: 12vw;
@@ -61,7 +61,7 @@ body{
 }
 
 .sonic{
-    background: url(assets/sonic.gif) no-repeat;
+    background: url(../assets/sonic.gif) no-repeat;
     background-size: cover;
     position: absolute;
     height: 12vw;
@@ -71,7 +71,7 @@ body{
 }
 
 .doublejump{
-    background: url(assets/sonic-jump.gif) no-repeat;
+    background: url(../assets/sonic-jump.gif) no-repeat;
     height: 11vw;
     background-size: contain;
     animation: doublejump 1s linear;
@@ -81,7 +81,7 @@ body{
 .jump{
     height: 12vw;
     width: 12vw;
-    background: url(assets/sonicball.gif) no-repeat;
+    background: url(../assets/sonicball.gif) no-repeat;
     background-size: cover;
     animation: sonic-jump 0.7s linear;
 }
@@ -93,7 +93,7 @@ body{
 
 .game-over{
     height: 12vw;
-    background: url(assets/sonicgameover.png) no-repeat;
+    background: url(../assets/sonicgameover.png) no-repeat;
     background-size: contain;
     left: 0.5rem;
 }
@@ -106,7 +106,7 @@ body{
 }
 
 .floor{
-    background: url(assets/floor.png);
+    background: url(../assets/floor.png);
     width: 100vw;
     height: 100vh;
 }

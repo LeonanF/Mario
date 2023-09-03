@@ -1,18 +1,18 @@
 
 const sonic = document.querySelector('.sonic')
-sonic.classList.add('paused')
+
 
 const monster = document.querySelector('.monster')
-monster.classList.add('paused')
+
 
 const cloud = document.querySelector('.clouds')
-cloud.classList.add('paused')
+
 
 const ring = document.querySelector('.ring')
-ring.classList.add('paused')
+
 
 const contador = document.querySelector('.contador p')
-contador.classList.add('paused')
+
 
 const fp = document.querySelector('.first-page')
 
@@ -20,19 +20,11 @@ const gb = document.querySelector('.game-board')
 
 function runGame() {
 
-
-    sonic.classList.remove('paused')
-    monster.classList.remove('paused')
-    cloud.classList.remove('paused')
-    ring.classList.remove('paused')
-    contador.classList.remove('paused')
-  
     let valor = 0
     let contIncre = false
     let teste
     let onAir
     let isDouble
-    let onFall
     let sonicHeight = sonic.clientHeight;
   
     //Setter de variáveis CSS
@@ -46,8 +38,9 @@ function runGame() {
 
     //Funções de pulo
     function jump() {
-        if(!sonic.classList.contains('game-over')){
-      sonic.classList.add('jump')}
+        if(!sonic.classList.contains('game-over') && !isDouble){
+      sonic.classList.add('jump')
+    }
       onAir = true
       setTimeout(() => {
         sonic.classList.remove('jump')
@@ -74,9 +67,9 @@ function runGame() {
   
     let teclaPress = false;
 
-    //Teste se a tecla foi pressionada
+    //Teste se a tecla foi pressionada para pulo
     document.addEventListener('keydown', (event) => {
-      if ((event.key === 'ArrowUp' || event.key === 'w') && !onAir && !onFall) {
+      if ((event.key === 'ArrowUp' || event.key === 'w') && !onAir) {
         if(!teclaPress){
         jump()
         teclaPress = true
@@ -89,18 +82,17 @@ function runGame() {
       teclaPress = false;
     })
 
-
+    //Testa tecla pressionada para doublejump
     document.addEventListener('keyup', (event) => {
       if (
         event.key === ' ' &&
         onAir &&
-        !isDouble &&
-        !sonic.classList.contains('fall')
+        !isDouble
       ) {
         doublejump()
       }
     })
-    
+
     //Função para colisão com anel
     function checkCollisionRing() {
       const sonicPosition = +window.getComputedStyle(sonic).top.replace('px', '')
@@ -197,20 +189,17 @@ function runGame() {
         }, 1000)
       }
     })
-  }
-
-  if (sonic.classList.contains('paused')) {
-    function handleKeyUp(event) {
-      if (event.key === 'Enter') {
-        fp.remove()
-        setTimeout(()=>{
-        runGame()
-        document.removeEventListener('keyup', handleKeyUp)
-        }, 500)
-      }
-    }
   
-    document.addEventListener('keyup', handleKeyUp)
+  //Atualizando funções para clique, para funcionar em mobile, V0.1
+  
+  //Função de pulo ao clicar
+  document.addEventListener('click', ()=>{
+    if(!onAir)
+    jump()
+    else if(onAir && !isDouble)
+    doublejump()
+  })  
+  
   }
 
   //Função para atualizar o translateY atual e deixar o doublejump funcional
@@ -233,7 +222,10 @@ function runGame() {
       gameBoard.style.height = `${adjustedHeight}vh`;
     }
   }
+
   // Chamar a função quando a página carregar e quando a tela for redimensionada
   window.addEventListener('load', adjustGameBoardHeight);
   window.addEventListener('resize', adjustGameBoardHeight);
   
+  //Chama a função para rodar o jogo
+  runGame();
